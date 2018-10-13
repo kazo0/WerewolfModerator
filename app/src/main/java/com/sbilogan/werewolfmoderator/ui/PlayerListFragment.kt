@@ -15,7 +15,7 @@ import com.sbilogan.werewolfmoderator.model.Player
 import kotlinx.android.synthetic.main.fragment_player_list.*
 
 class PlayerListFragment : Fragment() {
-    private var playerListAdapter: PlayerListAdapter? = null
+    private lateinit var playerListAdapter: PlayerListAdapter
     private var players = mutableListOf("Steve", "John")
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -30,17 +30,18 @@ class PlayerListFragment : Fragment() {
     }
 
     private fun setupControls() {
-        players_list.layoutManager = LinearLayoutManager(requireActivity())
-
         playerListAdapter = PlayerListAdapter(players)
+
+        players_list.layoutManager = LinearLayoutManager(requireActivity())
         players_list.adapter = playerListAdapter
+        players_list.setHasFixedSize(true)
 
         fab.setOnClickListener { addPlayer() }
     }
 
     private fun addPlayer() {
         players.add("Penny")
-        playerListAdapter?.setPlayersList(players)
+        playerListAdapter.setPlayersList(players)
     }
 
     companion object {

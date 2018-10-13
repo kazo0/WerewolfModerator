@@ -7,21 +7,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.sbilogan.werewolfmoderator.R
 
-class PlayerListAdapter(
-        private var playerList: List<String>?
-): RecyclerView.Adapter<PlayerListAdapter.ViewHolder>() {
+class PlayerListAdapter(private var playerList: List<String>) :
+        RecyclerView.Adapter<PlayerListAdapter.ViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.player_item, parent, false))
     }
 
     override fun getItemCount(): Int {
-       return playerList?.size ?: 0
+       return playerList.size
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        playerList?.let {
-            viewHolder.playerName.text = it[position]
-        }
+        viewHolder.playerName.text = playerList[position]
 
     }
 
@@ -32,6 +30,5 @@ class PlayerListAdapter(
 
     class ViewHolder(v: View): RecyclerView.ViewHolder(v) {
         val playerName: TextView = v.findViewById(R.id.player_name)
-
     }
 }
